@@ -1,2 +1,4 @@
 js/.idea/workspace.xml
 js/node_modules
+js/build
+js/build-spec
