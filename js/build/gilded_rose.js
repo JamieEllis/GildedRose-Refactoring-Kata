@@ -1,5 +1,7 @@
+'use strict';
+
 class Item {
-  constructor(name, sellIn, quality){
+  constructor(name, sellIn, quality) {
     this.name = name;
     this.sellIn = sellIn;
     this.quality = quality;
@@ -7,7 +9,7 @@ class Item {
 }
 
 class Shop {
-  constructor(items=[]){
+  constructor(items = []) {
     this.items = items;
   }
 
@@ -15,8 +17,7 @@ class Shop {
     this.items.forEach(item => {
       if (item.name !== 'Aged Brie' && item.name !== 'Backstage passes to a TAFKAL80ETC concert' && item.name !== 'Sulfuras, Hand of Ragnaros') {
         item.quality -= 1;
-      }
-      else {
+      } else {
         item.quality += 1;
         if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
           if (item.sellIn <= 10) {
@@ -36,12 +37,10 @@ class Shop {
             if (item.name !== 'Sulfuras, Hand of Ragnaros') {
               item.quality -= 1;
             }
-          }
-          else {
+          } else {
             item.quality = 0;
           }
-        }
-        else {
+        } else {
           item.quality += 1;
         }
       }
@@ -58,7 +57,6 @@ class Shop {
     return this.items;
   }
 }
-
 
 module.exports = {
   Item,
