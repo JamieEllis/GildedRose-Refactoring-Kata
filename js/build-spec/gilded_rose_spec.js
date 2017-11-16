@@ -72,6 +72,18 @@ describe('Gilded Rose', () => {
         const items = shop.updateQuality();
         items[0].quality.should.equal(7);
       });
+
+      it('unexpired conjured: quality increases by two each day', () => {
+        const shop = new _gilded_rose.Shop([new _gilded_rose.Item('Conjured Aged Brie', 5, 5)]);
+        const items = shop.updateQuality();
+        items[0].quality.should.equal(7);
+      });
+
+      it('expired conjured: quality increases by four each day', () => {
+        const shop = new _gilded_rose.Shop([new _gilded_rose.Item('Aged Brie', -5, 5)]);
+        const items = shop.updateQuality();
+        items[0].quality.should.equal(9);
+      });
     });
 
     describe('sulfuras', () => {
@@ -117,6 +129,24 @@ describe('Gilded Rose', () => {
         const shop = new _gilded_rose.Shop([new _gilded_rose.Item('Backstage passes to a TAFKAL80ETC concert', 0, 50)]);
         const items = shop.updateQuality();
         items[0].quality.should.equal(0);
+      });
+
+      it('conjured quality increases by two when more than 10 days until concert', () => {
+        const shop = new _gilded_rose.Shop([new _gilded_rose.Item('Conjured Backstage passes to a TAFKAL80ETC concert', 50, 5)]);
+        const items = shop.updateQuality();
+        items[0].quality.should.equal(7);
+      });
+
+      it('conjured quality increases by four when more than 5 days but less than or equal to 10 days until concert', () => {
+        const shop = new _gilded_rose.Shop([new _gilded_rose.Item('Conjured Backstage passes to a TAFKAL80ETC concert', 7, 5)]);
+        const items = shop.updateQuality();
+        items[0].quality.should.equal(9);
+      });
+
+      it('conjured quality increases by six when less than or equal to 5 days until concert', () => {
+        const shop = new _gilded_rose.Shop([new _gilded_rose.Item('Conjured Backstage passes to a TAFKAL80ETC concert', 3, 5)]);
+        const items = shop.updateQuality();
+        items[0].quality.should.equal(11);
       });
     });
   });
